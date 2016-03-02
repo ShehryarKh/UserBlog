@@ -89,8 +89,7 @@ class Delete(View):
 	def post(self,request,slug):
 		obj = get_object_or_404(Posts,slug=slug)
 		obj.delete()
-		#redirect
-		return redirect(request,"index.html",{})
+		return redirect("index")
 
 
 class User_Registration(View):
@@ -99,7 +98,24 @@ class User_Registration(View):
 
 	def get(self,request):
 		if self.user.is_authenticated():
-			return render("index")
+			return render(request,"index.html",{})
+		user_form = UserForm()
+		context={
+			"user_form" = user_form
+		}
+		return render(request,self.template, context)
+
+	def post(self,request):
+		user_form = UserForm(data=request.POST)
+
+		if user_form.is_valid():
+			user = user_form.save()
+		else:
+			context={
+				'user_form': user_form,
+			}
+		return render(request,self.template, context)
+
 		
 
 
