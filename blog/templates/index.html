@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+		<meta charset="UTF-8">
+    <title>Bloggy: A Blog about Blogs</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/5.5.2/css/foundation.css" />
+</head>
+<body>
+	
+	{% for post in posts %}
+	
+	<div class = "row"> 
+
+		<h2><a href="{% url 'blog:details' slug=post.slug %}"> {{post.title}}</a></h2>
+		<p>{{post.content}}</p>
+		<p>created at: {{post.created_at}}</p>
+
+
+
+	</div>
+	{% endfor %}
+
+	<a href="{% url 'blog:create' %}"> create</a>
+	
+</body>
+</html>

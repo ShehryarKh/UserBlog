@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>details</title>
+</head>
+<body>
+	<form action="{% url 'blog:details' slug=post.slug %}" method = "POST">
+		{% csrf_token %}
+		
+		{{form.as_p}}
+		<input type = "submit" value="submit">
+	</form>
+
+	<form action="{% url 'blog:delete' slug=post.slug %}" method="POST">
+        {% csrf_token %}
+
+
+        <input id = "delete" type="submit" class ="deletebutton" value="Delete">
+    </form>
+</body>
+</html>
